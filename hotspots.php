@@ -6,7 +6,7 @@
     <style type="text/css">
       html, body, #map-canvas { height: 100%; margin: 0; padding: 0;}
     </style>
-    <script src="js/jquery-1.11.2.min.js"></script>
+    <script src="./js/jquery.js"></script>
     <script type="text/javascript"
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCJnJCVhKRd_CuBlyxJ6nR0CpZw21tcIuo">
     </script>
@@ -17,8 +17,9 @@
 
       $.get('data.json', function(dat) {
         //console.log(dat)
-        var temp = dat.substring(1,dat.length-1);
-        data = $.parseJSON(dat);
+        //var temp = dat.substring(1,dat.length-1);
+        //data = $.parseJSON(dat);
+        data = dat;
         //console.table(data);
         console.log("Data Parsed");
       });

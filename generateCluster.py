@@ -12,6 +12,7 @@ import json
 data = json.load(open("heatmap.json"))
 
 latlong = [(str(item["lat"]), str(item['lng'])) for item in data]
+X = np.array([[item["lat"], item['lng']] for item in data])
 
 def interpretLabels(labels, places):
     clusters = [[] for label in set(labels)]
@@ -20,19 +21,23 @@ def interpretLabels(labels, places):
     return clusters   
 
 
-X = np.load("distanceMatrixV2.npy")
-X = np.nan_to_num(X)
+# X = np.load("distanceMatrixV2.npy")
+# X = np.nan_to_num(X)
 
 kmeans = KMeans(n_clusters=int(os.sys.argv[1]))
 
 kmeans.fit(X)
 
-clusters = interpretLabels(kmeans.labels_, latlong) 
+locations = []
+for i in range(int(os.sys.argv[1])):
+	locations.append({"lat": kmeans.cluster_centers_[i][0], "lng": kmeans.cluster_centers_[i][1]})
+print locations
+# clusters = interpretLabels(kmeans.labels_, latlong) 
 
 
-parseData= []
-for cluster in clusters:
-	parseData.append({"lat":cluster[0][0], "lng":cluster[0][1]})
-print parseData	
+# parseData= []
+# for cluster in clusters:
+# 	parseData.append({"lat":cluster[0][0], "lng":cluster[0][1]})
+# print parseData	
 
 
