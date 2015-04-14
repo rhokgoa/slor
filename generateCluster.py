@@ -9,10 +9,10 @@ import os
 from sklearn.cluster import KMeans
 import json 
 
-data = json.load(open("heatmap.json"))
+data = json.load(open("data.json"))
 
 latlong = [(str(item["lat"]), str(item['lng'])) for item in data]
-X = np.array([[item["lat"], item['lng']] for item in data])
+X = np.array([[item["lat"], item['lng']] for i in range(item["count"]) for item in data])
 
 def interpretLabels(labels, places):
     clusters = [[] for label in set(labels)]
